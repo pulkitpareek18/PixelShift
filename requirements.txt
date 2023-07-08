@@ -1,6 +1,4 @@
-Flask==2.0.1
-Werkzeug==2.0.1
-shortuuid==1.0.11
+Flask
+Werkzeug
+shortuuid
 opencv-python
-gunicorn==19.7.1
-psycopg2 
