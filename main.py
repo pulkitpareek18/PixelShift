@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, flash, redirect , url_for
+from flask import Flask, render_template, request, flash
 from werkzeug.utils import secure_filename
-import os, cv2
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+import os, json, threading, time
+from functions import *
+import shortuuid
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 UPLOAD_FOLDER = "uploads"
 
@@ -9,53 +11,72 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "dslaifjk"
 
-def processImage(filename,operation):
-    img = cv2.imread(f"uploads/{filename}")
-    
-    match operation:
-        case "cgray":
-            imgProcessed = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-            cv2.imwrite(f"static/{filename}", imgProcessed)
-            return(filename)
-        case "cwebp":
-            imgProcessed = cv2.imwrite(f"static/{filename.split('.')[0]}.webp", img)
-            return(f"{filename.split('.')[0]}.webp")
-        case "cpng":
-                imgProcessed = cv2.imwrite(f"static/{filename.split('.')[0]}.png", img)
-                return(f"{filename.split('.')[0]}.png")
-        case "cjpg":
-                imgProcessed = cv2.imwrite(f"static/{filename.split('.')[0]}.jpg", img)
-                return(f"{filename.split('.')[0]}.jpg")
-        
-    print(f"The filename is {filename} & operation is {operation}")
-    
+value = [
+        ["cpng","PNG"],
+        ["cjpg","JPG"],
+        ["cjpeg","JPEG"],
+        ["cwebp","WEBP"],
+        ["ctif","TIF"],
+        ["cbmp","BMP"],
+        ["ctiff","TIFF"],
+        ["cgray","Grayscale"]
+    ]
 
-@app.route('/')
-def home():
-    return render_template("index.html")
+def cleanGarbage():
+    threading.Timer(600, cleanGarbage).start()
+    for file in os.listdir("uploads"):  
+         os.remove(os.path.join("uploads",file))
+    for file in os.listdir("static/processedImages"):  
+         os.remove(os.path.join("static/processedImages",file))
+    print(f'Garbage Cleaned at {time.strftime("%m/%d/%Y, %H:%M:%S")}.')
+
+cleanGarbage()
+
+def normalToast(message,category):
+    return   f'''<div class="toast show align-items-center text-bg-{category} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    {message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                </div>'''         
+ 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/edit', methods=['GET', 'POST'])
-def edit():
+@app.route('/', methods=['GET','POST'])
+def home():
+    return render_template("index.html",values=value)
+
+@app.route('/api/convert', methods=['GET','POST'])
+def api():
     if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return "error"
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return "Error no selected file"
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            filename = processImage(filename,request.form['operation'])
-            flash(f"your image has been processed and is saved <a href='/static/{filename}'>here</a>")
-    return render_template("index.html")
+            # check if the post request has the file part
+            if 'file' not in request.files:
+                return normalToast("No File Part.","danger")
+            file = request.files['file']
+            # If the user does not select a file, the browser submits an
+            # empty file without a filename.
+            if file.filename == '':
+                return normalToast("No Selected File.","danger")
+            if request.form["operation"] == "":
+                return normalToast("Please Select an File Format","danger")
+             
+            if not allowed_file(file.filename):
+                                return normalToast(f"Please enter an Image.","danger")
+                
+                
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                filename = ".".join(filename.split(".")[:-1]) + "_" + shortuuid.uuid() + "." + filename.split(".")[-1]
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                filename = processImage(filename,request.form['operation'])
+               
+                return normalToast(f"Your Image is processed Sucessfully. Click <a class='alert-link' href='/static/processedImages/{filename}' download>here</a> to Download.","success")
+
+
 
 app.run(debug=True)
