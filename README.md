@@ -2,6 +2,10 @@
 
 PixelShift is a simple Image Editing website that can the Image format to PNG, JPG, JPEG, WEBP, BMP, TIF, TIFF, and Grayscale also.
 
+## Requirements
+
+Requires **Python version 3.10** and packages included in **requirements.txt**.
+
 ## Demo
 
 https://pixelshift.pythonanywhere.com
