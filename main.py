@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, send_from_directory
 from werkzeug.utils import secure_filename
 import os, json, threading, time
 from functions import *
 import shortuuid
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = "static/uploads"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -24,10 +24,8 @@ value = [
 
 def cleanGarbage():
     threading.Timer(600, cleanGarbage).start()
-    for file in os.listdir("uploads"):  
-         os.remove(os.path.join("uploads",file))
-    for file in os.listdir("static/processedImages"):  
-         os.remove(os.path.join("static/processedImages",file))
+    for file in os.listdir(UPLOAD_FOLDER):  
+         os.remove(os.path.join(UPLOAD_FOLDER,file))
     print(f'Garbage Cleaned at {time.strftime("%m/%d/%Y, %H:%M:%S")}.')
 
 cleanGarbage()
@@ -72,11 +70,15 @@ def api():
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 filename = ".".join(filename.split(".")[:-1]) + "_" + shortuuid.uuid() + "." + filename.split(".")[-1]
+                originalFilename = filename
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filename = processImage(filename,request.form['operation'])
-               
-                return normalToast(f"Your Image is processed Sucessfully. Click <a class='alert-link' href='/static/processedImages/{filename}' download>here</a> to Download.","success")
+                
+                if filename != originalFilename: 
+                    os.remove(os.path.join(UPLOAD_FOLDER,originalFilename))
+
+                return normalToast(f"Your Image is processed Sucessfully. Click <a class='alert-link' href='/static/uploads/{filename}' download>here</a> to Download.","success")
 
 
 
-app.run()
+app.run(debug=True)

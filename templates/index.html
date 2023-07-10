@@ -12,6 +12,9 @@
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/square-buttons.css') }}">
   <title>PixelShift - Edit your Images Online</title>
+  <script>
+
+  </script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"
     integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
@@ -42,9 +45,17 @@
       </div>
     </div>
   </nav>
-  <div id="alert" style="position: absolute; right: 0;" class="mx-3 my-3 d-flex justify-content-end"></div>
 
-  <div class="m-5">
+
+
+  <div id="alert" style="position: absolute; right: 0;" class="mx-3 my-3 d-flex justify-content-end"></div>
+  
+  <div style="height: 52px" class="text-center justify-content-center">
+    <div id="spinner" style="display: none;" class="spinner-border mt-3" role="status">
+    </div>
+  </div>
+  
+  <div>
     <div class="container my-0" method="post" enctype="multipart/form-data">
       <form id="data" class="m-2" action="/api/convert" method="post" enctype="multipart/form-data">
         <div class="mb-3">

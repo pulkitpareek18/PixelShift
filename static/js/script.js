@@ -33,9 +33,11 @@ const selectMe = (element) =>{
    
 
    
+   let spinner = document.getElementById("spinner")
 
    $("form#data").submit(function(e) {
      Pace.restart()
+     spinner.style.display = "inline-block"
      e.preventDefault();    
      var formData = new FormData(this);
      let alertContainer = document.getElementById('alert')
@@ -47,8 +49,18 @@ const selectMe = (element) =>{
          data: formData,
          success: function (data) {
            alertContainer.innerHTML = data
-           console.log(data)
+           spinner.style.display = "none"
          },
+         fail: function(){
+          alertContainer.innerHTML = `<div class="toast show align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+              <div class="toast-body">
+              No Internet Connection.
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          </div>`   
+              },
          cache: false,
          contentType: false,
          processData: false
