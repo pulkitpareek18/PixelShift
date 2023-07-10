@@ -59,7 +59,7 @@
     <div class="container my-0" method="post" enctype="multipart/form-data">
       <form id="data" class="m-2" action="/api/convert" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-          <input type="file" name="file" accept="image/*" class="form-control" id="customFile" />
+          <input required type="file" name="file" accept="image/*" class="form-control" id="customFile" />
         </div>
         <input value="" type="hidden" id="imageFormatInput" name="operation">
         <h2>Convert Image to:</h2>
