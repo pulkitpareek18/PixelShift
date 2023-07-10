@@ -12,6 +12,8 @@ https://pixelshift.pythonanywhere.com
 
 ## Run Locally
 
+Make sure to install Python 3.10 before proceeding further.
+
 Clone the project
 
 ```bash
