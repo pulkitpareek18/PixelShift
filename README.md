@@ -1,6 +1,6 @@
 # PixelShift
 
-PixelShift is a simple Image Editing website created using Flask that can the Image format to PNG, JPG, JPEG, WEBP, BMP, TIF, TIFF, and Grayscale also.
+PixelShift is a simple Image Editing website created using Flask that can the Image format to **PNG, JPG, JPEG, WEBP, BMP, TIF, TIFF, and Grayscale** also.
 
 ## Requirements
 
