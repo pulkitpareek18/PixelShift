@@ -23,23 +23,22 @@
     /* Style for Medium Screen */
     @media (max-width:767px) {
     .btn-sq-responsive {
-    width: 100px !important; /* whatever width you want for medium screen */
+    width: 250px !important; /* whatever width you want for medium screen */
     max-width: 100% !important;
     max-height: 100% !important;
-    height: 100px !important; /* whatever height you want for medium screen */
-    font-size:12px;
+    height: 250px !important; /* whatever height you want for medium screen */
+    font-size:21px;
     }
     }
     
     /* Style for Small Screen */
     @media (max-width:575px) {
     .btn-sq-responsive {
-    width: 50px !important; /* whatever width you want for mobile screen */
+    width: 250px !important; /* whatever width you want for mobile screen */
     max-width: 100% !important;
     max-height: 100% !important;
-    height: 50px !important; /* whatever height you want for mobile screen */
-    font-size:5px;
+    height: 250px !important; /* whatever height you want for mobile screen */
     padding: 0px;
-    font-size:7px;
+    font-size:21px;
     }
     }
