@@ -24,8 +24,9 @@ value = [
 
 def cleanGarbage():
     threading.Timer(600, cleanGarbage).start()
-    for file in os.listdir(UPLOAD_FOLDER):  
-         os.remove(os.path.join(UPLOAD_FOLDER,file))
+    for file in os.listdir(UPLOAD_FOLDER):
+        if file != ".gitkeep":
+            os.remove(os.path.join(UPLOAD_FOLDER,file))
     print(f'Garbage Cleaned at {time.strftime("%m/%d/%Y, %H:%M:%S")}.')
 
 cleanGarbage()
