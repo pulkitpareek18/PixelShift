@@ -41,10 +41,8 @@ Start the server
 ## Features
 
 - Can convert the Image format to **PNG, JPG, JPEG, WEBP, BMP, TIF, TIFF** 
-- Can convert Image to GrayScale
+- Can convert Images to GrayScale
 - Default Dark Mode
-
-
 
 
 ## Acknowledgements
@@ -56,12 +54,13 @@ Start the server
 ## Authors
 
 - [@pulkitpareek18](https://www.github.com/pulkitpareek18)
+- Currently, Pulkit Pareek is the only author fo this project. Contributions are always welcome!
 
 
 ## Contributing
 
 Contributions are always welcome!  
-If you have any new Idea or have found a bug, please don't hesitate to open a Pull Request.
+If you have any new ideas or have found a bug, please don't hesitate to open a Pull Request.
 
 
 ## License
