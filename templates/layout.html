@@ -11,7 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/square-buttons.css') }}">
-  <title>{% block title %}PixelShift - Privacy Policy{% endblock %}</title>
+  <title>{% block title %}{% endblock %}</title>
   <script>
 
   </script>
@@ -29,7 +29,7 @@
         background: linear-gradient(to left, #FFFF00 0%, #05C1FF 37%, #FFFF00 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;" 
-        class="navbar-brand font-weight-bold" href="#">PixelShift</a>
+        class="navbar-brand font-weight-bold" href="/">PixelShift</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -44,6 +44,12 @@
             </li> 
             <li class="nav-item">
                 <a class="nav-link" href="/privacy-policy">Privacy Policy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about-us">About Us</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="/contact-us">Contact Us</a>
             </li>
             </ul>
         </div>

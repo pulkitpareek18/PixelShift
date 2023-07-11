@@ -84,4 +84,12 @@ def api():
 def privacyPolicy():
     return render_template("privacy-policy.html")
 
+@app.route('/about-us')
+def aboutUs():
+    return render_template("about-us.html")
+
+@app.route('/contact-us')
+def contactUs():
+    return render_template("contact-us.html")
+
 app.run(debug=True)
