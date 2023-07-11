@@ -80,5 +80,8 @@ def api():
                 return normalToast(f"Your Image is processed Sucessfully. Click <a class='alert-link' href='/static/uploads/{filename}' download>here</a> to Download.","success")
 
 
+@app.route('/privacy-policy')
+def privacyPolicy():
+    return render_template("privacy-policy.html")
 
 app.run(debug=True)

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PixelShift is an Image editing utility which can convert Images to png, jpg, jpeg, bmp, tif, tiff, webp, grayscale and many more formats.">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/square-buttons.css') }}">
+  <title>{% block title %}PixelShift - Privacy Policy{% endblock %}</title>
+  <script>
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/fill-left.css') }}">
+</head>
+
+<body>
+  {% block navbar %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+        <a style="background: #FFFF00;
+        background: linear-gradient(to left, #FFFF00 0%, #05C1FF 37%, #FFFF00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;" 
+        class="navbar-brand font-weight-bold" href="#">PixelShift</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#features">Features</a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="/privacy-policy">Privacy Policy</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+  {% endblock %}
+  {% block body %}
+   
+  {% endblock %}
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
